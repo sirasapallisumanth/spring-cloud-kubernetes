@@ -1,4 +1,11 @@
-FROM openjdk:8-jdk-alpine
-COPY ./target/*.jar app.jar
+FROM eclipse-temurin:17-jdk-alpine
+
+WORKDIR /app
+
+COPY target/*.jar app.jar
+
 ENV JAVA_OPTS=""
-ENTRYPOINT exec java -jar app.jar --info
+
+EXPOSE 8080
+
+ENTRYPOINT ["sh", "-c", "java $JAVA_OPTS -jar app.jar"]
